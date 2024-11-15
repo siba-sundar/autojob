@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extract Text from Image</title>
+    <script src="https://unpkg.com/tesseract.js@2.1.5/dist/tesseract.min.js"></script>
+</head>
+<body>
+    <h1>Extract Text from Image</h1>
+    
+    <!-- Button to trigger text extraction -->
+    <button onclick="extractText()">Extract Text</button>
+
+    <!-- Area to display the extracted text -->
+    <div id="output" style="margin-top: 20px;">
+        <h3>Extracted Text:</h3>
+        <p id="textResult"></p>
+    </div>
+
+    <script>
+        function extractText() {
+            const outputElement = document.getElementById("textResult");
+            outputElement.innerText = "Extracting text...";
+
+            Tesseract.recognize(
+                '', // Ensure this path is correct
+                'eng',
+                { logger: e => console.log(e) }
+            )
+            .then(result => {
+                outputElement.innerText = result.data.text;
+                console.log(result.data.text); // Logs the extracted text in the console
+            })
+            .catch(error => {
+                outputElement.innerText = "Error extracting text.";
+                console.error("Error:", error);
+            });
+        }
+    </script>
+</body>
+</html>

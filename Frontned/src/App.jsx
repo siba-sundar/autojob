@@ -1,19 +1,42 @@
 import { useState } from 'react'
 import ReactDOM from "react-dom/client";
-import {createBrowserRouter} from "react-router-dom"
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+
+// imported components
+import Home from "./pages/Home.jsx"
+import LinkedinHome from "./components/linkedin/Linkedin.jsx";
+import IntershalaHome from  "./components/intershala/Intershala.jsx"
+import NavBar from "./components/NavBar.jsx"
+
+import {createBrowserRouter, RouterProvider} from  "react-router-dom"
 
 
 
 function App() {
+
+  const router = createBrowserRouter([
+    {
+      path:"/",
+      element:<><NavBar/><Home/></>
+    },
+    {
+      path:"/linkedin",
+      element:<><NavBar/><LinkedinHome/></>
+    },
+    {
+      path:"/intershala",
+      element:<><NavBar/><IntershalaHome/></>
+    }
+  ])
+
   const [count, setCount] = useState(0)
 
   return (
     <>
-    {/* <DetailsForm/> */}
-    <Orc/>
+    <div>
+      Hhahahah
+    </div>
+    
+    <RouterProvider router={router}/>
     </>
   )
 }
